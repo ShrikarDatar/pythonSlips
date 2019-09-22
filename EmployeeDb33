@@ -1,0 +1,56 @@
+import sqlite3
+import pandas as pd
+
+conn=None
+try:
+    conn = sqlite3.connect('employee.db')
+    print( "Opened database successfully")
+
+except:
+    print("error")
+
+conn.execute('''CREATE TABLE EMPLOYEE
+         (ID INT PRIMARY KEY     NOT NULL,
+         FIRSTNAME       TEXT    NOT NULL,
+         LASTNAME        INT     NOT NULL,
+         NUMBER        INT,
+         SALARY         REAL);''')
+print ("Table created successfully")
+
+
+
+conn.execute("INSERT INTO EMPLOYEE (ID,FIRSTNAME,LASTNAME,NUMBER,SALARY) \
+      VALUES (1, 'Paul','Doe', 46343, 20000.00 )");
+
+conn.execute("INSERT INTO EMPLOYEE (ID,FIRSTNAME,LASTNAME,NUMBER,SALARY) \
+      VALUES (2, 'Dinesh','Gat', 77878, 15000.00 )");
+
+conn.execute("INSERT INTO EMPLOYEE (ID,FIRSTNAME,LASTNAME,NUMBER,SALARY) \
+      VALUES (3, 'Ninad','Sumant', 56646, 30000.00 )");
+
+
+
+conn.commit()
+print ("Records created successfully")
+
+
+cursor = conn.execute("SELECT id, firstname as FIRSTNAME, lastname, salary from EMPLOYEE")
+# dat=pd.read_sql_query("SELECT id, firstname as firstname, lastname, salary from EMPLOYEE",conn)
+# print(dat)
+for row in cursor:
+    pf=(row[3]*12)/100
+    print ("ID = ", row[0])
+    print ("NAME = ", row[1])
+    print ("LASTNAME = ", row[2])
+    print ("SALARY = ", row[3])
+    print("PF=",pf,"\n")
+
+# print ("Operation done successfully")
+# conn.close()
+
+
+
+
+# conn.execute("UPDATE COMPANY set SALARY = 25000.00 where ID = 1")
+# conn.commit
+# print "Total number of rows updated :", conn.total_changes
