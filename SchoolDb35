@@ -1,0 +1,55 @@
+import sqlite3
+import pandas as pd
+
+conn=None
+try:
+    conn = sqlite3.connect('school.db')
+    print( "Opened database successfully")
+
+except:
+    print("error")
+
+conn.execute('''CREATE TABLE SCHOOL
+         (ID INT PRIMARY KEY     NOT NULL,
+         NAME       TEXT    NOT NULL,
+         AGE        INT     NOT NULL,
+         MARKS         INT);''')
+print ("Table created successfully")
+
+
+
+conn.execute("INSERT INTO SCHOOL (ID,NAME,AGE,MARKS) \
+      VALUES (1, 'Anjali',16,80 )");
+
+conn.execute("INSERT INTO SCHOOL (ID,NAME,AGE,MARKS) \
+      VALUES (2, 'Dinesh',15,70 )");
+
+conn.execute("INSERT INTO SCHOOL (ID,NAME,AGE,MARKS) \
+      VALUES (3, 'Ninad',16,90 )");
+
+
+
+conn.commit()
+print ("Records created successfully")
+
+
+cursor = conn.execute("SELECT id, name, age, marks from SCHOOL")
+# dat=pd.read_sql_query("SELECT id, firstname as firstname, lastname, salary from EMPLOYEE",conn)
+# print(dat)
+for row in cursor:
+    print ("ID = ", row[0])
+    print ("NAME = ", row[1])
+    print ("AGE = ", row[2])
+    print ("MARKS = ", row[3],"\n")
+
+print ("Operation done successfully")
+# conn.close()
+
+
+
+
+conn.execute("UPDATE SCHOOL set MARKS = 150 where NAME = 'Anjali'")
+conn.commit()
+print( "Total number of rows updated :", conn.total_changes)
+
+conn.close()
