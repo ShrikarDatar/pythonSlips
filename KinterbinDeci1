@@ -1,0 +1,35 @@
+from tkinter import *
+
+
+window = Tk()
+
+def convertDecimal():
+    result.delete(1.0,END)
+    val=int(numberEntry.get())
+    res=bin(val)
+    result.insert(END,res)
+    
+def convertBinary():
+    result.delete(1.0,END)
+    val=(numberEntry.get())
+    res=int(val,2)
+    result.insert(END,res)
+
+    
+number = Label(window, text="Enter Number ", font=("Arial", 19, "bold"))
+number.place(x=50, y=100)
+numberEntry = Entry(window)
+numberEntry.place(x=300, y=100)
+
+b = Button(text="DecimalToBinary", command=convertDecimal)
+b.place(x=100, y=300)
+
+b1 = Button(text="BinaryToDecimal", command=convertBinary)
+b1.place(x=300, y=300)
+
+
+result=Text(window,height=2,width=20,background="Red")
+result.place(x=200,y=400)
+
+window.geometry('500x500')
+window.mainloop()
