@@ -1,0 +1,33 @@
+from tkinter import *
+
+window=Tk()
+
+def convertDecimal():
+    result.delete(1.0,END)
+    number=int(numberEntry.get())
+    res=hex(number)
+    result.insert(END,res)
+
+def converHexadecimal():
+    result.delete(1.0,END)
+    number=numberEntry.get()
+    res=int(number,16)
+    result.insert(END,res)
+
+number=Label(window,text="Enter a number",font=('Arial',16,'bold'))
+number.place(x=50,y=100)
+
+numberEntry=Entry(window)
+numberEntry.place(x=300,y=100)
+
+b1=Button(text="DecimalToHexadecimal",command=convertDecimal)
+b1.place(x=100,y=300)
+
+b2=Button(text="HexadeciamlToDecimal",command=converHexadecimal)
+b2.place(x=300,y=300)
+
+result=Text(window,height=2,width=20,background="Red")
+result.place(x=200,y=400)
+
+window.geometry('500x500')
+window.mainloop()
