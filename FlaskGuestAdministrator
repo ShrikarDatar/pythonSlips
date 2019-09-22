@@ -1,0 +1,19 @@
+from flask import Flask,redirect,url_for
+app=Flask(__name__)
+@app.route('/admin')
+def adminstrator():
+    return "Hallo adminstrator"
+
+@app.route('/guest/<guest>')
+def guestlog(guest):
+    return "hallo %s is guest" %guest
+
+
+@app.route('/user/<name>')
+def username(name):
+    if name=='admin':
+        return redirect(url_for('adminstrator'))
+    else:
+        return redirect(url_for('guestlog',guest=name))       
+app.run(debug=True)
+
