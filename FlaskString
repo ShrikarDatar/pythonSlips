@@ -1,0 +1,41 @@
+from flask import Flask, redirect, url_for,render_template
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    dict={1:"Hello buddy",2:"Today it is rainy",3:"We can have a cup of coffee"}
+    return render_template('prac.html',dict=dict)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+   ---------------------------------------
+   index.html
+   
+   
+   <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+            h1{
+                text-align: center;
+                font-style: italic;
+                color:black
+            }
+            body{
+                background-color: rgb(75, 181, 230);
+            }
+
+
+    </style>
+</head>
+<body>
+    {% for x,y in dict.items() %}
+    <h1>{{ y}}
+    </h1>
+    {% endfor %}
+</body>
+</html>
