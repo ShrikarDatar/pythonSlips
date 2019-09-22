@@ -1,0 +1,47 @@
+from tkinter import *
+
+window=Tk()
+
+def find():
+    str1=input.get()
+    index=Lb1.curselection()[0]
+    getext=Lb1.get(index)
+
+    if getext=="length of string":
+        text.delete(1.0,END)
+        text.insert(END,len(str1))
+
+    elif getext=="append":
+        text.delete(1.0,END)
+        str2="hello"
+        newstr=" ".join((str2,str1))
+        text.insert(END,newstr)
+    
+    elif getext=="occurences of the":
+        text.delete(1.0,END)
+        text.insert(END,str1.count("the"))
+
+    # text.insert(END,getext)
+
+
+
+
+input=Entry(window)
+
+Lb1 = Listbox(window)
+Lb1.insert(1, "length of string")
+Lb1.insert(2, "append")
+Lb1.insert(3, "occurences of the")
+
+b1=Button(window,width=6,text="submit",command=find)
+
+input.pack(side=TOP)
+b1.pack(side=BOTTOM)
+
+Lb1.pack()
+
+
+text=Text(window,height=2,width=30,background="Red")
+
+text.pack()
+window.mainloop()
