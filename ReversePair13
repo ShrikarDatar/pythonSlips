@@ -1,0 +1,26 @@
+'''def reverse_pairs(a):
+    b=[]
+    k=a+['konrad']
+    for x in a:
+        c=''
+        for i in range(len(x)):
+            c=x[i]+c
+        if isinlist(c,k):
+            b.append(x)
+            k.remove(x)
+            print (x)
+        else: k.remove(x)
+    return b'''
+
+    
+with open('words.txt') as fd:
+    word_list = fd.read().splitlines()
+
+word_dict = {word: None for word in word_list}
+
+def find_rev_pairs(word_dict):
+    for word in word_dict:
+        if word[::-1] in word_dict:
+            print (word, word[::-1])
+
+find_rev_pairs(word_dict)
