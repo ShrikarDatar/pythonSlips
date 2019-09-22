@@ -1,0 +1,34 @@
+'''f1 = open("Documents\primenumbers.txt", "r")
+f2 = open("Documents\happynumbers.txt", "r")
+f2_list = f2.readlines()
+result = list()
+
+for line in f1:
+	if line in f2_list:
+		result.append(line.strip() )
+
+f1.close()
+f2.close()
+
+print (result)'''
+
+primeslist = []
+with open('primenumbers.txt') as primesfile:
+	line = primesfile.readline()
+	while line:
+		primeslist.append(int(line))
+		line = primesfile.readline()
+
+happieslist = []
+with open('happynumbers.txt') as happiesfile:
+	line = happiesfile.readline()
+	while line:
+		happieslist.append(int(line))
+		line = happiesfile.readline()
+
+overlaplist = []
+for elem in primeslist:
+	if elem in happieslist:
+		overlaplist.append(elem)
+		
+print(overlaplist)
