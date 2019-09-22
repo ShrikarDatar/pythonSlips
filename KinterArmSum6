@@ -1,0 +1,46 @@
+from tkinter import *
+
+window=Tk()
+
+def armstrong():
+    num=int(input.get())
+    sum=0
+    temp=num
+    while temp>0:
+        digit=temp%10
+        sum+=digit ** 3
+        temp //=10
+    if num==sum:
+        text.delete(1.0,END)
+        str1="Armstrong Number"
+        text.insert(END,str1)
+    else:
+        text.delete(1.0,END)
+        str2="Not Armstrong"
+        text.insert(END,str2)
+
+
+def sumn():
+    text.delete(1.0,END)
+    num=int(input.get())
+    result=0
+    if num>0:
+        result=(num*(num+1))/2
+        text.insert(END,result)
+
+
+
+input=Entry(window)
+
+text=Text(window,height=2,width=20,background="Red")
+
+b1=Button(window,text="Armstrong",command=armstrong)
+
+b2=Button(window,text="Sum",command=sumn)
+
+input.pack()
+text.pack()
+b1.pack()
+b2.pack()
+
+window.mainloop()
