@@ -1,0 +1,23 @@
+class Shape:
+    def __init__(self):
+        pass
+    def area(self):
+        a=0
+        print(a)
+
+
+
+class Square(shape):
+    def __init__(self, length):
+        self.length = length
+        super(Square, self).__init__()
+
+    def area(self):
+        print(0)
+        a = (self.length * self.length)
+        print('The area of a square with a side length of %f is %f' % (self.length, a))
+
+
+s = Square(2)
+s.area()
+
