@@ -1,0 +1,34 @@
+from tkinter import *
+
+window=Tk()
+
+def convertDecimal():
+    result.delete(1.0,END)
+    no=int(numberEntry.get())
+    res=oct(no)
+    result.insert(END,res)
+
+def converOctal():
+    result.delete(1.0,END)
+    no=numberEntry.get()
+    res=int(no,8)
+    result.insert(END,res)
+
+
+number=Label(window,text="Enter a number ",font=('Arial',16,'bold'))
+number.place(x=50,y=100)
+
+numberEntry=Entry(window)
+numberEntry.place(x=300,y=100)
+
+b=Button(text="DecimalToOctal",command=convertDecimal)
+b.place(x=100,y=300)
+
+b1=Button(text="OctalToDecimal",command=converOctal)
+b1.place(x=300,y=300)
+
+result=Text(window,height=2,width=20,background="Red")
+result.place(x=200,y=400)
+
+window.geometry('500x500')
+window.mainloop()
