@@ -1,0 +1,82 @@
+Login.html
+<html>
+    <head> USER LOGIN DETAILS</head>
+    <body>
+        <h1>{{s}}</h1>
+        <h2>create the session</h2>
+    <form action = "/success" method = "POST">
+        USER LOGIN<input type = text name='nm'>
+        PASSWORD<input type="password" name="pass">
+            <input type="submit" value="submit">
+            </form>
+</html>
+-------------------------------------------------
+success.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+</head>
+    <body>
+        <h1>You have Successfully Logged In</h1>
+        
+        <a href="/getcookie">Click here</a>
+    </body>
+</html>
+----------------------------------------------------------
+thanks.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Welcome,{{name}}</h1>
+    <a href="/remove">click to remove session</a>
+</body>
+</html>
+------------------------------------
+app.py
+from flask import Flask,render_template,make_response,request,session,escape
+app=Flask(__name__)
+
+app.secret_key="123456789"
+@app.route('/')
+def index():
+    if 'username' in session:
+      username = session['username']
+    else:
+        return render_template('login.html')
+@app.route('/success',methods = ['POST', 'GET'])    
+def success():
+    if request.method=='POST':
+        session['user']=request.form['nm']
+        session['password']=request.form['pass']
+        # resp=make_response(render_template('success.html'))
+  
+        # resp.set_cookie('userID',user)
+        # resp.set_cookie('password',password)
+    return render_template('success.html')
+
+@app.route('/getcookie')
+def getcookie():
+#name = request.cookies.get('userID')
+    name=session['user']
+    return render_template('thanks.html',name=name) 
+
+@app.route('/remove')
+def remove():
+    session.pop('user',None)
+    session.pop('password',None)
+    s="session removed"
+    return render_template('login.html',s=s)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
